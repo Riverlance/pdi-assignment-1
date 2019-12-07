@@ -1,3 +1,11 @@
+def onPixel(matrix, callback):
+    height = matrix.shape[0]
+    width = matrix.shape[1]
+    for i in range(width):
+        for j in range(height):
+            callback(matrix, i, j)
+
+
 # 1. Convert RGB to YIQ; convert YIQ to RGB
 
 def rgb_to_yiq(r, g, b):
@@ -36,20 +44,35 @@ def rgb_negative_filter(r, g, b):
     b = 255 - b
     return r, g, b
 
-def yiq_negative_filter(y):
+
+def y_negative_filter(y):
     y = 255 - y
     return y
 
 
+def apply_rgb_negative_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = rgb_negative_filter(r, g, b)
+    onPixel(matrix, callback)
+
+
+def apply_y_negative_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        y, i_, q = rgb_to_yiq(r, g, b)
+        matrix[j, i] = yiq_to_rgb(y_negative_filter(y), i, q)
+    onPixel(matrix, callback)
+
+
 # 4. Multiplying brightness control
 
-def yiq_set_brightness(y, brightness):
-    y = y * brightness
-    return y
-
-
 def rgb_set_brightness(r, g, b, brightness):
-    y, i, q = rgb_to_yiq(r, g, b)
-    y = yiq_set_brightness(y, brightness)
-    r, g, b = yiq_to_rgb(y, i, q)
+    r *= brightness
+    g *= brightness
+    b *= brightness
     return r, g, b
+
+def y_set_brightness(y, brightness):
+    y *= brightness
+    return y
