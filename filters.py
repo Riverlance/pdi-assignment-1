@@ -33,7 +33,48 @@ def yiq_to_rgb(y, i, q):
     return r, g, b
 
 
-# 2. ... (to do)
+# 2. Monochromatic and colored in R, G or B
+
+def apply_monochromatic_r_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = r, 0, 0
+    onPixel(matrix, callback)
+
+
+def apply_monochromatic_g_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = 0, g, 0
+    onPixel(matrix, callback)
+
+
+def apply_monochromatic_b_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = 0, 0, b
+    onPixel(matrix, callback)
+
+
+def apply_colored_r_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = 255, g, b
+    onPixel(matrix, callback)
+
+
+def apply_colored_g_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = r, 255, b
+    onPixel(matrix, callback)
+
+
+def apply_colored_b_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = r, g, 255
+    onPixel(matrix, callback)
 
 
 # 3. Negative filter
