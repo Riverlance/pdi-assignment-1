@@ -73,6 +73,21 @@ def rgb_set_brightness(r, g, b, brightness):
     b *= brightness
     return r, g, b
 
+
 def y_set_brightness(y, brightness):
     y *= brightness
     return y
+
+
+def apply_rgb_set_brightness(matrix, brightness):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = rgb_set_brightness(r, g, b, brightness)
+    onPixel(matrix, callback)
+
+def apply_y_set_brightness(matrix, brightness):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        y, i_, q = rgb_to_yiq(r, g, b)
+        matrix[j, i] = yiq_to_rgb(y_set_brightness(y), i_, q)
+    onPixel(matrix, callback)

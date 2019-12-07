@@ -96,3 +96,17 @@ y_negative_filter_matrix = numpy.copy(rgb_matrix)
 filters.apply_y_negative_filter(y_negative_filter_matrix)
 Image.fromarray(y_negative_filter_matrix.astype('uint8')).save('lena_negative_yiq.png')
 '''
+
+'''
+# RGB brightness filter
+rgb_brightness_matrix = numpy.copy(rgb_matrix)
+filters.apply_rgb_set_brightness(rgb_brightness_matrix, brightness)
+Image.fromarray(rgb_brightness_matrix.astype('uint8')).save('lena_brightness_rgb.png')
+'''
+
+'''
+# Y brightness filter
+y_brightness_matrix = numpy.copy(rgb_matrix)
+filters.apply_rgb_set_brightness(y_brightness_matrix, brightness)
+Image.fromarray(y_brightness_matrix.astype('uint8')).save('lena_brightness_yiq.png')
+'''
