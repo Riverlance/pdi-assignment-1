@@ -39,3 +39,17 @@ def rgb_negative_filter(r, g, b):
 def yiq_negative_filter(y):
     y = 255 - y
     return y
+
+
+# 4. Multiplying brightness control
+
+def yiq_set_brightness(y, brightness):
+    y = y * brightness
+    return y
+
+
+def rgb_set_brightness(r, g, b, brightness):
+    y, i, q = rgb_to_yiq(r, g, b)
+    y = yiq_set_brightness(y, brightness)
+    r, g, b = yiq_to_rgb(y, i, q)
+    return r, g, b
