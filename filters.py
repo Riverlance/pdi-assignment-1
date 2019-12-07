@@ -23,3 +23,19 @@ def yiq_to_rgb(y, i, q):
     g = max(0, min(round(y - .272*i - .647*q), 255))  # Green perceived intensity
     b = max(0, min(round(y - 1.106*i + 1.703*q), 255))  # Blue perceived intensity
     return r, g, b
+
+
+# 2. ... (to do)
+
+
+# 3. Negative filter
+
+def rgb_negative_filter(r, g, b):
+    r = 255 - r
+    g = 255 - g
+    b = 255 - b
+    return r, g, b
+
+def yiq_negative_filter(y):
+    y = 255 - y
+    return y
