@@ -191,4 +191,31 @@ Image.fromarray(median_b_matrix.astype('uint8')).save('results/median_3x3_b.png'
 '''
 
 
-# Common filter
+'''
+# Most common filter in R (3x3 or 5x5)
+most_common_r_matrix = numpy.copy(rgb_matrix)
+most_common_r_matrix = filters.apply_most_common_r_filter(most_common_r_matrix,
+                                                          'masks/most_common_3x3.txt',
+                                                          rgb_channels_size)
+Image.fromarray(most_common_r_matrix.astype('uint8')).save('results/most_common_3x3_r.png')
+'''
+
+
+'''
+# Most common filter in G (3x3 or 5x5)
+most_common_g_matrix = numpy.copy(rgb_matrix)
+most_common_g_matrix = filters.apply_most_common_g_filter(most_common_g_matrix,
+                                                          'masks/most_common_3x3.txt',
+                                                          rgb_channels_size)
+Image.fromarray(most_common_g_matrix.astype('uint8')).save('results/most_common_3x3_g.png')
+'''
+
+
+'''
+# Most common filter in B (3x3 or 5x5)
+most_common_b_matrix = numpy.copy(rgb_matrix)
+most_common_b_matrix = filters.apply_most_common_b_filter(most_common_b_matrix,
+                                                          'masks/most_common_3x3.txt',
+                                                          rgb_channels_size)
+Image.fromarray(most_common_b_matrix.astype('uint8')).save('results/most_common_3x3_b.png')
+'''
