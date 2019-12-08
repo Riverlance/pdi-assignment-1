@@ -1,5 +1,6 @@
 import numpy
 import os
+import math
 
 
 def on_pixel(matrix, callback):
@@ -281,12 +282,16 @@ def apply_average_filter(original_matrix, mask_path, channels=1):
     return on_mask_pixel(original_matrix, mask_path, default_on_mask_values, channels)
 
 
-def apply_sobel_matrix(original_matrix, channels=1):
+def apply_sobel_filter(original_matrix, mode=None, channels=1):
     # Apply Sobel vertical border detection
     vertical = on_mask_pixel(original_matrix, 'masks/sobel_vertical.txt', default_on_mask_values, channels)
+    if (mode == 1):
+        return vertical
 
     # Apply Sobel horizontal border detection
     horizontal = on_mask_pixel(original_matrix, 'masks/sobel_horizontal.txt', default_on_mask_values, channels)
+    if (mode == 0):
+        return horizontal
 
     ret = numpy.zeros_like(original_matrix)
 
@@ -303,4 +308,33 @@ def apply_sobel_matrix(original_matrix, channels=1):
 
 
 # 6. M x N mask convolution - Median filter, Common filter
-# To do
+
+def apply_median_filter(original_matrix, mask_path, sort_channel, channels=1):
+    def on_mask_values(slice_matrix, mask_matrix, channels=1):
+        values = []
+
+        for i in range(slice_matrix.shape[0]):
+            for j in range(slice_matrix.shape[1]):
+                values.append(slice_matrix[i, j])
+
+        def get_key(tuple):
+            return tuple[sort_channel]
+
+        values = sorted(values, key=get_key)
+
+        ret = values[math.floor(len(values) / 2)]
+        return ret
+
+    return on_mask_pixel(original_matrix, mask_path, on_mask_values, channels)
+
+
+def apply_median_r_filter(original_matrix, mask_path, channels=1):
+    return apply_median_filter(original_matrix, mask_path, 0, channels)  # Sort by red channel
+
+
+def apply_median_g_filter(original_matrix, mask_path, channels=1):
+    return apply_median_filter(original_matrix, mask_path, 1, channels)  # Sort by green channel
+
+
+def apply_median_b_filter(original_matrix, mask_path, channels=1):
+    return apply_median_filter(original_matrix, mask_path, 2, channels)  # Sort by blue channel

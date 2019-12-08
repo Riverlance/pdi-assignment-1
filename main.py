@@ -82,58 +82,58 @@ print('Multiplying brightness from Y:\n\t({0}, {1}, {2})'.format(_y, _i, _q))
 
 '''
 # Monochromatic in R
-monochromatic_r_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_monochromatic_r_filter(monochromatic_r_filter_matrix)
-Image.fromarray(monochromatic_r_filter_matrix.astype('uint8')).save('results/monochromatic_r.png')
+monochromatic_r_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_r_filter(monochromatic_r_matrix)
+Image.fromarray(monochromatic_r_matrix.astype('uint8')).save('results/monochromatic_r.png')
 '''
 
 '''
 # Monochromatic in G
-monochromatic_g_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_monochromatic_g_filter(monochromatic_g_filter_matrix)
-Image.fromarray(monochromatic_g_filter_matrix.astype('uint8')).save('results/monochromatic_g.png')
+monochromatic_g_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_g_filter(monochromatic_g_matrix)
+Image.fromarray(monochromatic_g_matrix.astype('uint8')).save('results/monochromatic_g.png')
 '''
 
 '''
 # Monochromatic in B
-monochromatic_b_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_monochromatic_b_filter(monochromatic_b_filter_matrix)
-Image.fromarray(monochromatic_b_filter_matrix.astype('uint8')).save('results/monochromatic_b.png')
+monochromatic_b_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_b_filter(monochromatic_b_matrix)
+Image.fromarray(monochromatic_b_matrix.astype('uint8')).save('results/monochromatic_b.png')
 '''
 
 '''
 # Colored in R
-colored_r_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_colored_r_filter(colored_r_filter_matrix)
-Image.fromarray(colored_r_filter_matrix.astype('uint8')).save('results/colored_r.png')
+colored_r_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_r_filter(colored_r_matrix)
+Image.fromarray(colored_r_matrix.astype('uint8')).save('results/colored_r.png')
 '''
 
 '''
 # Colored in G
-colored_g_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_colored_g_filter(colored_g_filter_matrix)
-Image.fromarray(colored_g_filter_matrix.astype('uint8')).save('results/colored_g.png')
+colored_g_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_g_filter(colored_g_matrix)
+Image.fromarray(colored_g_matrix.astype('uint8')).save('results/colored_g.png')
 '''
 
 '''
 # Colored in B
-colored_b_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_colored_b_filter(colored_b_filter_matrix)
-Image.fromarray(colored_b_filter_matrix.astype('uint8')).save('results/colored_b.png')
+colored_b_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_b_filter(colored_b_matrix)
+Image.fromarray(colored_b_matrix.astype('uint8')).save('results/colored_b.png')
 '''
 
 '''
 # RGB negative filter
-rgb_negative_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_rgb_negative_filter(rgb_negative_filter_matrix)
-Image.fromarray(rgb_negative_filter_matrix.astype('uint8')).save('results/negative_rgb.png')
+rgb_negative_matrix = numpy.copy(rgb_matrix)
+filters.apply_rgb_negative_filter(rgb_negative_matrix)
+Image.fromarray(rgb_negative_matrix.astype('uint8')).save('results/negative_rgb.png')
 '''
 
 '''
 # Y negative filter
-y_negative_filter_matrix = numpy.copy(rgb_matrix)
-filters.apply_y_negative_filter(y_negative_filter_matrix)
-Image.fromarray(y_negative_filter_matrix.astype('uint8')).save('results/negative_yiq.png')
+y_negative_matrix = numpy.copy(rgb_matrix)
+filters.apply_y_negative_filter(y_negative_matrix)
+Image.fromarray(y_negative_matrix.astype('uint8')).save('results/negative_yiq.png')
 '''
 
 '''
@@ -152,7 +152,7 @@ Image.fromarray(y_brightness_matrix.astype('uint8')).save('results/brightness_yi
 '''
 
 '''
-# Average filter
+# Average filter (3x3 or 5x5)
 average_matrix = numpy.copy(rgb_matrix)
 average_matrix = filters.apply_average_filter(average_matrix, 'masks/average_3x3.txt', rgb_channels_size)
 Image.fromarray(average_matrix.astype('uint8')).save('results/average_3x3.png')
@@ -160,15 +160,35 @@ Image.fromarray(average_matrix.astype('uint8')).save('results/average_3x3.png')
 
 
 '''
-# Sobel filter
+# Sobel filter (mode=0 for horizontal, mode=1 for vertical, or mode=None for both)
 sobel_matrix = numpy.copy(rgb_matrix)
-sobel_matrix = filters.apply_sobel_matrix(sobel_matrix, rgb_channels_size)
+sobel_matrix = filters.apply_sobel_filter(sobel_matrix, None, rgb_channels_size)
 Image.fromarray(sobel_matrix.astype('uint8')).save('results/sobel.png')
 '''
 
 
-# Median filter
+'''
+# Median filter in R (3x3 or 5x5)
+median_r_matrix = numpy.copy(rgb_matrix)
+median_r_matrix = filters.apply_median_r_filter(median_r_matrix, 'masks/median_3x3.txt', rgb_channels_size)
+Image.fromarray(median_r_matrix.astype('uint8')).save('results/median_3x3_r.png')
+'''
+
+
+'''
+# Median filter in G (3x3 or 5x5)
+median_g_matrix = numpy.copy(rgb_matrix)
+median_g_matrix = filters.apply_median_g_filter(median_g_matrix, 'masks/median_3x3.txt', rgb_channels_size)
+Image.fromarray(median_g_matrix.astype('uint8')).save('results/median_3x3_g.png')
+'''
+
+
+'''
+# Median filter in B (3x3 or 5x5)
+median_b_matrix = numpy.copy(rgb_matrix)
+median_b_matrix = filters.apply_median_b_filter(median_b_matrix, 'masks/median_3x3.txt', rgb_channels_size)
+Image.fromarray(median_b_matrix.astype('uint8')).save('results/median_3x3_b.png')
+'''
 
 
 # Common filter
-
