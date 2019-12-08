@@ -17,7 +17,7 @@ brightness = 0.5
 print('> Brightness:\n\t{0}'.format(brightness))
 
 # Input image
-input_image = Image.open('lena.png')
+input_image = Image.open('_lena.png')
 width, height = input_image.size
 print('> Opened image from path \'{0}\' (width = {1}, height = {2})'.format(input_image.fp.name, width, height))
 
@@ -82,70 +82,88 @@ print('Multiplying brightness from Y:\n\t({0}, {1}, {2})'.format(_y, _i, _q))
 
 '''
 # Monochromatic in R
-monochromatic_r_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_monochromatic_r_filter(monochromatic_r_filter_matrix)  # Apply filter
-Image.fromarray(monochromatic_r_filter_matrix.astype('uint8')).save('lena_monochromatic_r.png')  # Save output
+monochromatic_r_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_r_filter(monochromatic_r_filter_matrix)
+Image.fromarray(monochromatic_r_filter_matrix.astype('uint8')).save('results/monochromatic_r.png')
 '''
 
 '''
 # Monochromatic in G
-monochromatic_g_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_monochromatic_g_filter(monochromatic_g_filter_matrix)  # Apply filter
-Image.fromarray(monochromatic_g_filter_matrix.astype('uint8')).save('lena_monochromatic_g.png')  # Save output
+monochromatic_g_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_g_filter(monochromatic_g_filter_matrix)
+Image.fromarray(monochromatic_g_filter_matrix.astype('uint8')).save('results/monochromatic_g.png')
 '''
 
 '''
 # Monochromatic in B
-monochromatic_b_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_monochromatic_b_filter(monochromatic_b_filter_matrix)  # Apply filter
-Image.fromarray(monochromatic_b_filter_matrix.astype('uint8')).save('lena_monochromatic_b.png')  # Save output
+monochromatic_b_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_monochromatic_b_filter(monochromatic_b_filter_matrix)
+Image.fromarray(monochromatic_b_filter_matrix.astype('uint8')).save('results/monochromatic_b.png')
 '''
 
 '''
 # Colored in R
-colored_r_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_colored_r_filter(colored_r_filter_matrix)  # Apply filter
-Image.fromarray(colored_r_filter_matrix.astype('uint8')).save('lena_colored_r.png')  # Save output
+colored_r_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_r_filter(colored_r_filter_matrix)
+Image.fromarray(colored_r_filter_matrix.astype('uint8')).save('results/colored_r.png')
 '''
 
 '''
 # Colored in G
-colored_g_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_colored_g_filter(colored_g_filter_matrix)  # Apply filter
-Image.fromarray(colored_g_filter_matrix.astype('uint8')).save('lena_colored_g.png')  # Save output
+colored_g_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_g_filter(colored_g_filter_matrix)
+Image.fromarray(colored_g_filter_matrix.astype('uint8')).save('results/colored_g.png')
 '''
 
 '''
 # Colored in B
-colored_b_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_colored_b_filter(colored_b_filter_matrix)  # Apply filter
-Image.fromarray(colored_b_filter_matrix.astype('uint8')).save('lena_colored_b.png')  # Save output
+colored_b_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_colored_b_filter(colored_b_filter_matrix)
+Image.fromarray(colored_b_filter_matrix.astype('uint8')).save('results/colored_b.png')
 '''
 
 '''
 # RGB negative filter
-rgb_negative_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_rgb_negative_filter(rgb_negative_filter_matrix)  # Apply filter
-Image.fromarray(rgb_negative_filter_matrix.astype('uint8')).save('lena_negative_rgb.png')  # Save output
+rgb_negative_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_rgb_negative_filter(rgb_negative_filter_matrix)
+Image.fromarray(rgb_negative_filter_matrix.astype('uint8')).save('results/negative_rgb.png')
 '''
 
 '''
 # Y negative filter
-y_negative_filter_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_y_negative_filter(y_negative_filter_matrix)  # Apply filter
-Image.fromarray(y_negative_filter_matrix.astype('uint8')).save('lena_negative_yiq.png')  # Save output
+y_negative_filter_matrix = numpy.copy(rgb_matrix)
+filters.apply_y_negative_filter(y_negative_filter_matrix)
+Image.fromarray(y_negative_filter_matrix.astype('uint8')).save('results/negative_yiq.png')
 '''
 
 '''
 # RGB brightness filter
-rgb_brightness_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_rgb_set_brightness(rgb_brightness_matrix, brightness)  # Apply filter
-Image.fromarray(rgb_brightness_matrix.astype('uint8')).save('lena_brightness_rgb.png')  # Save output
+rgb_brightness_matrix = numpy.copy(rgb_matrix)
+filters.apply_rgb_brightness_filter(rgb_brightness_matrix, brightness)
+Image.fromarray(rgb_brightness_matrix.astype('uint8')).save('results/brightness_rgb.png')
 '''
+
 
 '''
 # Y brightness filter
-y_brightness_matrix = numpy.copy(rgb_matrix)  # Copy original matrix
-filters.apply_rgb_set_brightness(y_brightness_matrix, brightness)  # Apply filter
-Image.fromarray(y_brightness_matrix.astype('uint8')).save('lena_brightness_yiq.png')  # Save output
+y_brightness_matrix = numpy.copy(rgb_matrix)
+filters.apply_y_brightness_filter(y_brightness_matrix, brightness)
+Image.fromarray(y_brightness_matrix.astype('uint8')).save('results/brightness_yiq.png')
 '''
+
+'''
+# Average filter
+average_matrix = numpy.copy(rgb_matrix)
+average_matrix = filters.apply_average_filter(average_matrix, 'masks/average_3x3.txt', rgb_channels_size)
+Image.fromarray(average_matrix.astype('uint8')).save('results/average_3x3.png')
+'''
+
+
+# Sobel filter
+
+
+# Median filter
+
+
+# Common filter
+
