@@ -159,7 +159,12 @@ Image.fromarray(average_matrix.astype('uint8')).save('results/average_3x3.png')
 '''
 
 
+'''
 # Sobel filter
+sobel_matrix = numpy.copy(rgb_matrix)
+sobel_matrix = filters.apply_sobel_matrix(sobel_matrix, rgb_channels_size)
+Image.fromarray(sobel_matrix.astype('uint8')).save('results/sobel.png')
+'''
 
 
 # Median filter

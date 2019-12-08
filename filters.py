@@ -21,8 +21,8 @@ def default_on_mask_values(slice_matrix, mask_matrix, channels=1):
             mask_r, mask_g, mask_b = mask_matrix[i, j]
             ret = ret[0] + slice_r * mask_r, ret[1] + slice_g * mask_g, ret[2] + slice_b * mask_b
 
-    ret = max(0, min(round(ret[0]), 255)), \
-          max(0, min(round(ret[1]), 255)), \
+    ret = max(0, min(round(ret[0]), 255)),\
+          max(0, min(round(ret[1]), 255)),\
           max(0, min(round(ret[2]), 255))
     return ret
 
@@ -277,31 +277,29 @@ def apply_y_brightness_filter(matrix, brightness):
 
 # 5. M x N mask convolution - Average filter, Sobel filter
 
-'''
-mask_matrix, pivot = filters.get_mask(mask_path)
-
-mask_matrix = filters.get_flipped_hv(mask_matrix)
-
-print(mask_matrix)
-print(pivot)
-
-# original size
-rows = 2
-columns = 4
-
-# Original matrix
-original_matrix = numpy.ones((rows, columns))
-
-expanded_matrix = filters.get_expanded_matrix(original_matrix, mask_matrix, pivot)
-print(expanded_matrix)
-
-matrix = filters.get_matrix(expanded_matrix, mask_matrix, pivot)
-print(matrix)
-'''
-
-
 def apply_average_filter(original_matrix, mask_path, channels=1):
     return on_mask_pixel(original_matrix, mask_path, default_on_mask_values, channels)
+
+
+def apply_sobel_matrix(original_matrix, channels=1):
+    # Apply Sobel vertical border detection
+    vertical = on_mask_pixel(original_matrix, 'masks/sobel_vertical.txt', default_on_mask_values, channels)
+
+    # Apply Sobel horizontal border detection
+    horizontal = on_mask_pixel(original_matrix, 'masks/sobel_horizontal.txt', default_on_mask_values, channels)
+
+    ret = numpy.zeros_like(original_matrix)
+
+    # Sum both, vertical and horizontal
+    for i in range(ret.shape[0]):
+        for j in range(ret.shape[1]):
+            vertical_r, vertical_g, vertical_b = vertical[i, j]
+            horizontal_r, horizontal_g, horizontal_b = horizontal[i, j]
+            ret[i, j] = max(0, min(vertical_r + horizontal_r, 255)),\
+                        max(0, min(vertical_g + horizontal_g, 255)),\
+                        max(0, min(vertical_b + horizontal_b, 255))
+
+    return ret
 
 
 # 6. M x N mask convolution - Median filter, Common filter
