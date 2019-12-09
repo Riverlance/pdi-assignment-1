@@ -48,37 +48,7 @@ print('> From YIQ to RGB:\n\t({0}, {1}, {2}) -> Same RGB initial value'.format(_
 print()
 
 
-# 2. ... (to do)
-
-
-# 3. Negative filter
-
-# RGB negative filter
-_r, _g, _b = filters.rgb_negative_filter(r, g, b)
-print('> RGB with negative filter:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
-
-# Y negative filter
-_y, _i, _q = filters.y_negative_filter(y), i_, q
-_r, _g, _b = filters.yiq_to_rgb(_y, _i, _q)
-print('> Y with negative filter:\n\t({0}, {1}, {2}) -> It is RGB value ({3}, {4}, {5})'.format(_y, _i, _q, _r, _g, _b))
-
-print()
-
-
-# 4. Multiplying brightness control
-
-
-# Multiplying brightness from RGB
-_r, _g, _b = filters.rgb_set_brightness(r, g, b, brightness)
-print('Multiplying brightness from RGB:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
-
-# Multiplying brightness from Y
-_y, _i, _q = filters.y_set_brightness(y, brightness), i_, q
-print('Multiplying brightness from Y:\n\t({0}, {1}, {2})'.format(_y, _i, _q))
-
-
-# Generate output images
-
+# 2. Monochromatic and colored in R, G or B
 
 '''
 # Monochromatic in R
@@ -122,6 +92,20 @@ filters.apply_colored_b_filter(colored_b_matrix)
 Image.fromarray(colored_b_matrix.astype('uint8')).save('results/colored_b.png')
 '''
 
+
+# 3. Negative filter
+
+# RGB negative filter
+_r, _g, _b = filters.rgb_negative_filter(r, g, b)
+print('> RGB with negative filter:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
+
+# Y negative filter
+_y, _i, _q = filters.y_negative_filter(y), i_, q
+_r, _g, _b = filters.yiq_to_rgb(_y, _i, _q)
+print('> Y with negative filter:\n\t({0}, {1}, {2}) -> It is RGB value ({3}, {4}, {5})'.format(_y, _i, _q, _r, _g, _b))
+
+print()
+
 '''
 # RGB negative filter
 rgb_negative_matrix = numpy.copy(rgb_matrix)
@@ -136,6 +120,17 @@ filters.apply_y_negative_filter(y_negative_matrix)
 Image.fromarray(y_negative_matrix.astype('uint8')).save('results/negative_yiq.png')
 '''
 
+
+# 4. Multiplying brightness control
+
+# Multiplying brightness from RGB
+_r, _g, _b = filters.rgb_set_brightness(r, g, b, brightness)
+print('Multiplying brightness from RGB:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
+
+# Multiplying brightness from Y
+_y, _i, _q = filters.y_set_brightness(y, brightness), i_, q
+print('Multiplying brightness from Y:\n\t({0}, {1}, {2})'.format(_y, _i, _q))
+
 '''
 # RGB brightness filter
 rgb_brightness_matrix = numpy.copy(rgb_matrix)
@@ -143,13 +138,15 @@ filters.apply_rgb_brightness_filter(rgb_brightness_matrix, brightness)
 Image.fromarray(rgb_brightness_matrix.astype('uint8')).save('results/brightness_rgb.png')
 '''
 
-
 '''
 # Y brightness filter
 y_brightness_matrix = numpy.copy(rgb_matrix)
 filters.apply_y_brightness_filter(y_brightness_matrix, brightness)
 Image.fromarray(y_brightness_matrix.astype('uint8')).save('results/brightness_yiq.png')
 '''
+
+
+# 5. M x N mask convolution - Average filter, Sobel filter
 
 '''
 # Average filter (3x3 or 5x5)
@@ -167,13 +164,14 @@ Image.fromarray(sobel_matrix.astype('uint8')).save('results/sobel.png')
 '''
 
 
+# 6. M x N mask convolution - Median filter, Common filter
+
 '''
 # Median filter in R (3x3 or 5x5)
 median_r_matrix = numpy.copy(rgb_matrix)
 median_r_matrix = filters.apply_median_r_filter(median_r_matrix, 'masks/median_3x3.txt', rgb_channels_size)
 Image.fromarray(median_r_matrix.astype('uint8')).save('results/median_3x3_r.png')
 '''
-
 
 '''
 # Median filter in G (3x3 or 5x5)
@@ -182,14 +180,12 @@ median_g_matrix = filters.apply_median_g_filter(median_g_matrix, 'masks/median_3
 Image.fromarray(median_g_matrix.astype('uint8')).save('results/median_3x3_g.png')
 '''
 
-
 '''
 # Median filter in B (3x3 or 5x5)
 median_b_matrix = numpy.copy(rgb_matrix)
 median_b_matrix = filters.apply_median_b_filter(median_b_matrix, 'masks/median_3x3.txt', rgb_channels_size)
 Image.fromarray(median_b_matrix.astype('uint8')).save('results/median_3x3_b.png')
 '''
-
 
 '''
 # Most common filter in R (3x3 or 5x5)
@@ -200,7 +196,6 @@ most_common_r_matrix = filters.apply_most_common_r_filter(most_common_r_matrix,
 Image.fromarray(most_common_r_matrix.astype('uint8')).save('results/most_common_3x3_r.png')
 '''
 
-
 '''
 # Most common filter in G (3x3 or 5x5)
 most_common_g_matrix = numpy.copy(rgb_matrix)
@@ -209,7 +204,6 @@ most_common_g_matrix = filters.apply_most_common_g_filter(most_common_g_matrix,
                                                           rgb_channels_size)
 Image.fromarray(most_common_g_matrix.astype('uint8')).save('results/most_common_3x3_g.png')
 '''
-
 
 '''
 # Most common filter in B (3x3 or 5x5)
