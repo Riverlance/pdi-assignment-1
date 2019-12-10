@@ -48,7 +48,35 @@ print('> From YIQ to RGB:\n\t({0}, {1}, {2}) -> Same RGB initial value'.format(_
 print()
 
 
-# 2. Monochromatic and colored in R, G or B
+# 2. Grayscale, monochromatic and colored in R, G or B
+
+'''
+# Monochromatic in R
+gray_scale_r_matrix = numpy.copy(rgb_matrix)
+filters.apply_gray_scale_r_filter(gray_scale_r_matrix)
+Image.fromarray(gray_scale_r_matrix.astype('uint8')).save('results/gray_scale_r.png')
+'''
+
+'''
+# Monochromatic in G
+gray_scale_g_matrix = numpy.copy(rgb_matrix)
+filters.apply_gray_scale_g_filter(gray_scale_g_matrix)
+Image.fromarray(gray_scale_g_matrix.astype('uint8')).save('results/gray_scale_g.png')
+'''
+
+'''
+# Monochromatic in B
+gray_scale_b_matrix = numpy.copy(rgb_matrix)
+filters.apply_gray_scale_b_filter(gray_scale_b_matrix)
+Image.fromarray(gray_scale_b_matrix.astype('uint8')).save('results/gray_scale_b.png')
+'''
+
+'''
+# Monochromatic in Y
+gray_scale_y_matrix = numpy.copy(rgb_matrix)
+filters.apply_gray_scale_y_filter(gray_scale_y_matrix)
+Image.fromarray(gray_scale_y_matrix.astype('uint8')).save('results/gray_scale_y.png')
+'''
 
 '''
 # Monochromatic in R

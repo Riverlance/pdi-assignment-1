@@ -176,6 +176,35 @@ def yiq_to_rgb(y, i, q):
 
 # 2. Monochromatic and colored in R, G or B
 
+def apply_gray_scale_r_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = r, r, r
+    on_pixel(matrix, callback)
+
+
+def apply_gray_scale_g_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = g, g, g
+    on_pixel(matrix, callback)
+
+
+def apply_gray_scale_b_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        matrix[j, i] = b, b, b
+    on_pixel(matrix, callback)
+
+
+def apply_gray_scale_y_filter(matrix):
+    def callback(matrix, i, j):
+        r, g, b = matrix[j, i]
+        y, i_, q = rgb_to_yiq(r, g, b)
+        matrix[j, i] = yiq_to_rgb(y, 0, 0)
+    on_pixel(matrix, callback)
+
+
 def apply_monochromatic_r_filter(matrix):
     def callback(matrix, i, j):
         r, g, b = matrix[j, i]
