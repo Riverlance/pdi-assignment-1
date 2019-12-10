@@ -192,6 +192,22 @@ Image.fromarray(sobel_matrix.astype('uint8')).save('results/sobel.png')
 '''
 
 
+'''
+# Sobel filter (mode=0 for horizontal, mode=1 for vertical, or mode=None for both)
+sobel_horizontal_matrix = numpy.copy(rgb_matrix)
+sobel_horizontal_matrix = filters.apply_sobel_filter(sobel_horizontal_matrix, 0, rgb_channels_size)
+Image.fromarray(sobel_horizontal_matrix.astype('uint8')).save('results/sobel_horizontal.png')
+'''
+
+
+'''
+# Sobel filter (mode=0 for horizontal, mode=1 for vertical, or mode=None for both)
+sobel_vertical_matrix = numpy.copy(rgb_matrix)
+sobel_vertical_matrix = filters.apply_sobel_filter(sobel_vertical_matrix, 1, rgb_channels_size)
+Image.fromarray(sobel_vertical_matrix.astype('uint8')).save('results/sobel_vertical.png')
+'''
+
+
 # 6. M x N mask convolution - Median filter, Common filter
 
 '''
