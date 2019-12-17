@@ -102,8 +102,9 @@ def get_mask(mask_path, channels=1):
 
 # Flip horizontally and then vertically
 # Convert correlation <-> convolution
-def get_flipped_hv(matrix):
-    return numpy.flipud(numpy.fliplr(matrix))
+def get_flipped_hv(mask_matrix, pivot_pos):
+    return numpy.flipud(numpy.fliplr(mask_matrix)),\
+           [mask_matrix.shape[0] - pivot_pos[0] + 1, mask_matrix.shape[1] - pivot_pos[1] + 1]
 
 
 # Expand matrix with zeros around and return it
@@ -156,7 +157,7 @@ def on_mask_pixel(original_matrix, mask_path, on_mask_values_callback, channels=
         return None
     mask_matrix, pivot_pos = get_mask(mask_path, channels)
     # Converting from correlation to convolution
-    mask_matrix = get_flipped_hv(mask_matrix)
+    mask_matrix, pivot_pos = get_flipped_hv(mask_matrix, pivot_pos)
 
     # Original expanded matrix
     expanded_matrix = get_expanded_matrix(original_matrix, mask_matrix, pivot_pos, channels)
