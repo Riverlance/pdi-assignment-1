@@ -13,7 +13,6 @@ import filter.unmasked.colored
 import filter.unmasked.negative
 import filter.unmasked.brightness
 
-import filter.masked.average
 import filter.masked.sobel
 import filter.masked.median
 import filter.masked.most_common
@@ -241,14 +240,20 @@ Image.fromarray(brightness_matrix.astype('uint8')).save('results/brightness_offs
 '''
 # Average filter (3x3)
 average_matrix = numpy.copy(rgb_matrix)
-average_matrix = filter.masked.average.apply_average_filter(average_matrix, 'masks/average_3x3.txt', rgb_channels_size)
+average_matrix = filter.core.on_mask_pixel(average_matrix,
+                                           'masks/average_3x3.txt',
+                                           filter.core.default_on_mask_values,
+                                           rgb_channels_size)
 Image.fromarray(average_matrix.astype('uint8')).save('results/average_3x3.png')
 '''
 
 '''
 # Average filter (5x5)
 average_matrix = numpy.copy(rgb_matrix)
-average_matrix = filter.masked.average.apply_average_filter(average_matrix, 'masks/average_5x5.txt', rgb_channels_size)
+average_matrix = filter.core.on_mask_pixel(average_matrix,
+                                           'masks/average_5x5.txt',
+                                           filter.core.default_on_mask_values,
+                                           rgb_channels_size)
 Image.fromarray(average_matrix.astype('uint8')).save('results/average_5x5.png')
 '''
 
@@ -388,4 +393,27 @@ most_common_b_matrix = filter.masked.most_common.apply_most_common_b_filter(most
                                                                             'masks/most_common_5x5.txt',
                                                                             rgb_channels_size)
 Image.fromarray(most_common_b_matrix.astype('uint8')).save('results/most_common_5x5_b.png')
+'''
+
+
+# 6. M x N mask convolution - Gaussian filter
+
+'''
+# Gaussian filter (3x3)
+gaussian_matrix = numpy.copy(rgb_matrix)
+gaussian_matrix = filter.core.on_mask_pixel(gaussian_matrix,
+                                            'masks/gaussian_3x3.txt',
+                                            filter.core.default_on_mask_values,
+                                            rgb_channels_size)
+Image.fromarray(gaussian_matrix.astype('uint8')).save('results/gaussian_3x3.png')
+'''
+
+'''
+# Gaussian filter (3x3)
+gaussian_matrix = numpy.copy(rgb_matrix)
+gaussian_matrix = filter.core.on_mask_pixel(gaussian_matrix,
+                                            'masks/gaussian_5x5.txt',
+                                            filter.core.default_on_mask_values,
+                                            rgb_channels_size)
+Image.fromarray(gaussian_matrix.astype('uint8')).save('results/gaussian_5x5.png')
 '''

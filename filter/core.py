@@ -203,7 +203,7 @@ def on_mask_pixel(original_matrix, mask_path, on_mask_values_callback, channels=
 
 
 # Additional use when on_mask_pixel is used
-# Multiply each value of slice to mask and return the sum (domestic product)
+# Multiply each value of slice to mask and return the sum
 def default_on_mask_values(slice_matrix, mask_matrix, channels=1):
     ret = numpy.zeros(channels)
 
