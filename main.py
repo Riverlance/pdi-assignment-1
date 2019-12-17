@@ -136,17 +136,6 @@ Image.fromarray(colored_b_matrix.astype('uint8')).save('results/colored_b.png')
 
 # 3. Negative filter
 
-# RGB negative filter
-_r, _g, _b = filter.unmasked.negative.rgb_negative_filter(r, g, b)
-print('> RGB with negative filter:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
-
-# Y negative filter
-_y, _i, _q = filter.unmasked.negative.y_negative_filter(y_), i_, q_
-_r, _g, _b = filter.core.yiq_to_rgb(_y, _i, _q)
-print('> Y with negative filter:\n\t({0}, {1}, {2}) -> It is RGB value ({3}, {4}, {5})'.format(_y, _i, _q, _r, _g, _b))
-
-print()
-
 '''
 # RGB negative filter
 rgb_negative_matrix = numpy.copy(rgb_matrix)
