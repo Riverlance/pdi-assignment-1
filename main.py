@@ -25,8 +25,9 @@ r, g, b = 50, 150, 250
 print('> RGB:\n\t({0}, {1}, {2})'.format(r, g, b))
 y_, i_, q_ = 131.5, -91.8, 10.1  # YIQ value of RGB(50, 150, 250)
 print('> YIQ:\n\t({0}, {1}, {2})'.format(y_, i_, q_))
-brightness = 0.5
-print('> Brightness:\n\t{0}'.format(brightness))
+brightness_factor = 1.5  # 0 to 2
+brightness_offset = 100  # -255 to 255
+print('> Brightness:\n\tFactor: {0}%%\n\tOffset: {1}'.format(brightness_factor * 100, brightness_offset))
 
 # Input image
 input_image = Image.open('_lena.png')
@@ -206,26 +207,32 @@ Image.fromarray(y_negative_matrix.astype('uint8')).save('results/negative_q.png'
 
 # 4. Multiplying brightness control
 
-# Multiplying brightness from RGB
-_r, _g, _b = filter.unmasked.brightness.rgb_set_brightness(r, g, b, brightness)
-print('Multiplying brightness from RGB:\n\t({0}, {1}, {2})'.format(_r, _g, _b))
-
-# Multiplying brightness from Y
-_y, _i, _q = filter.unmasked.brightness.y_set_brightness(y_, brightness), i_, q_
-print('Multiplying brightness from Y:\n\t({0}, {1}, {2})'.format(_y, _i, _q))
-
 '''
-# RGB brightness filter
-rgb_brightness_matrix = numpy.copy(rgb_matrix)
-rgb_brightness_matrix = filter.unmasked.brightness.apply_rgb_brightness_filter(rgb_brightness_matrix, brightness)
-Image.fromarray(rgb_brightness_matrix.astype('uint8')).save('results/brightness_rgb.png')
+# RGB brightness by factor filter
+brightness_matrix = numpy.copy(rgb_matrix)
+brightness_matrix = filter.unmasked.brightness.apply_rgb_brightness_factor_filter(brightness_matrix, brightness_factor)
+Image.fromarray(brightness_matrix.astype('uint8')).save('results/brightness_factor_rgb.png')
 '''
 
 '''
-# Y brightness filter
-y_brightness_matrix = numpy.copy(rgb_matrix)
-y_brightness_matrix = filter.unmasked.brightness.apply_y_brightness_filter(y_brightness_matrix, brightness)
-Image.fromarray(y_brightness_matrix.astype('uint8')).save('results/brightness_yiq.png')
+# Y brightness by factor filter
+brightness_matrix = numpy.copy(rgb_matrix)
+brightness_matrix = filter.unmasked.brightness.apply_y_brightness_factor_filter(brightness_matrix, brightness_factor)
+Image.fromarray(brightness_matrix.astype('uint8')).save('results/brightness_factor_yiq.png')
+'''
+
+'''
+# RGB brightness by offset filter
+brightness_matrix = numpy.copy(rgb_matrix)
+brightness_matrix = filter.unmasked.brightness.apply_rgb_brightness_offset_filter(brightness_matrix, brightness_offset)
+Image.fromarray(brightness_matrix.astype('uint8')).save('results/brightness_offset_rgb.png')
+'''
+
+'''
+# Y brightness by offset filter
+brightness_matrix = numpy.copy(rgb_matrix)
+brightness_matrix = filter.unmasked.brightness.apply_y_brightness_offset_filter(brightness_matrix, brightness_offset)
+Image.fromarray(brightness_matrix.astype('uint8')).save('results/brightness_offset_yiq.png')
 '''
 
 
