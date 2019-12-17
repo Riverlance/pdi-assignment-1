@@ -31,9 +31,9 @@ def apply_most_common_filter(original_matrix, mask_path, most_common_channel, ch
         values = []
         ret = numpy.zeros(channels)
 
-        for i in range(slice_matrix.shape[0]):
-            for j in range(slice_matrix.shape[1]):
-                values.append(slice_matrix[i, j])
+        for y in range(slice_matrix.shape[0]):
+            for x in range(slice_matrix.shape[1]):
+                values.append(slice_matrix[y, x])
 
         most_common_indexes = get_most_common_from_index(values, most_common_channel)
         for index in most_common_indexes:

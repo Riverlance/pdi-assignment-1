@@ -6,9 +6,9 @@ def apply_median_filter(original_matrix, mask_path, sort_channel, channels=1):
     def on_mask_values(slice_matrix, mask_matrix, channels=1):
         values = []
 
-        for i in range(slice_matrix.shape[0]):
-            for j in range(slice_matrix.shape[1]):
-                values.append(slice_matrix[i, j])
+        for y in range(slice_matrix.shape[0]):
+            for x in range(slice_matrix.shape[1]):
+                values.append(slice_matrix[y, x])
 
         def get_key(tuple):
             return tuple[sort_channel]
