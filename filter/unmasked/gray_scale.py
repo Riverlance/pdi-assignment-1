@@ -1,6 +1,14 @@
 import filter.core
 
 
+def apply_gray_scale_rgb_filter(matrix):
+    def callback(_matrix, x, y):
+        r, g, b = _matrix[y, x]
+        average = round((r + g + b) / 3)
+        _matrix[y, x] = average, average, average
+    return filter.core.on_pixel(matrix, callback)
+
+
 def apply_gray_scale_r_filter(matrix):
     def callback(_matrix, x, y):
         r = _matrix[y, x][0]

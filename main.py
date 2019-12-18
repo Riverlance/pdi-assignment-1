@@ -64,31 +64,38 @@ print()
 # 2. Gray scale, monochromatic and colored in R, G or B
 
 '''
+# Gray scale in RGB
+gray_scale_matrix = numpy.copy(rgb_matrix)
+gray_scale_matrix = filter.unmasked.gray_scale.apply_gray_scale_rgb_filter(gray_scale_matrix)
+Image.fromarray(gray_scale_matrix.astype('uint8')).save('results/gray_scale_rgb.png')
+'''
+
+'''
 # Gray scale in R
-gray_scale_r_matrix = numpy.copy(rgb_matrix)
-gray_scale_r_matrix = filter.unmasked.gray_scale.apply_gray_scale_r_filter(gray_scale_r_matrix)
-Image.fromarray(gray_scale_r_matrix.astype('uint8')).save('results/gray_scale_r.png')
+gray_scale_matrix = numpy.copy(rgb_matrix)
+gray_scale_matrix = filter.unmasked.gray_scale.apply_gray_scale_r_filter(gray_scale_matrix)
+Image.fromarray(gray_scale_matrix.astype('uint8')).save('results/gray_scale_r.png')
 '''
 
 '''
 # Gray scale in G
-gray_scale_g_matrix = numpy.copy(rgb_matrix)
-gray_scale_g_matrix = filter.unmasked.gray_scale.apply_gray_scale_g_filter(gray_scale_g_matrix)
-Image.fromarray(gray_scale_g_matrix.astype('uint8')).save('results/gray_scale_g.png')
+gray_scale_matrix = numpy.copy(rgb_matrix)
+gray_scale_matrix = filter.unmasked.gray_scale.apply_gray_scale_g_filter(gray_scale_matrix)
+Image.fromarray(gray_scale_matrix.astype('uint8')).save('results/gray_scale_g.png')
 '''
 
 '''
 # Gray scale in B
-gray_scale_b_matrix = numpy.copy(rgb_matrix)
-gray_scale_b_matrix = filter.unmasked.gray_scale.apply_gray_scale_b_filter(gray_scale_b_matrix)
-Image.fromarray(gray_scale_b_matrix.astype('uint8')).save('results/gray_scale_b.png')
+gray_scale_matrix = numpy.copy(rgb_matrix)
+gray_scale_matrix = filter.unmasked.gray_scale.apply_gray_scale_b_filter(gray_scale_matrix)
+Image.fromarray(gray_scale_matrix.astype('uint8')).save('results/gray_scale_b.png')
 '''
 
 '''
 # Gray scale in Y
-gray_scale_y_matrix = numpy.copy(rgb_matrix)
-gray_scale_y_matrix = filter.unmasked.gray_scale.apply_gray_scale_y_filter(gray_scale_y_matrix)
-Image.fromarray(gray_scale_y_matrix.astype('uint8')).save('results/gray_scale_y.png')
+gray_scale_matrix = numpy.copy(rgb_matrix)
+gray_scale_matrix = filter.unmasked.gray_scale.apply_gray_scale_y_filter(gray_scale_matrix)
+Image.fromarray(gray_scale_matrix.astype('uint8')).save('results/gray_scale_y.png')
 '''
 
 '''
