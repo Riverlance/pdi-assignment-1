@@ -133,19 +133,19 @@ def get_matrix(matrix, mask_matrix, pivot_pos):
 
     # Remove columns from right
     if margin_right > 0:
-        matrix = numpy.delete(matrix, [matrix.shape[1] - margin_right, matrix.shape[1] - 1], axis=1)
+        matrix = numpy.delete(matrix, numpy.s_[matrix.shape[1] - margin_right:matrix.shape[1]], axis=1)
 
     # Remove columns from left
     if margin_left > 0:
-        matrix = numpy.delete(matrix, [0, margin_left - 1], axis=1)
+        matrix = numpy.delete(matrix, numpy.s_[:margin_left], axis=1)
 
     # Remove rows from bottom
     if margin_bottom > 0:
-        matrix = numpy.delete(matrix, [matrix.shape[0] - margin_bottom, matrix.shape[0] - 1], axis=0)
+        matrix = numpy.delete(matrix, numpy.s_[matrix.shape[0] - margin_bottom:matrix.shape[0]], axis=0)
 
     # Remove rows from top
     if margin_top > 0:
-        matrix = numpy.delete(matrix, [0, margin_top - 1], axis=0)
+        matrix = numpy.delete(matrix, numpy.s_[:margin_top], axis=0)
 
     return matrix
 
