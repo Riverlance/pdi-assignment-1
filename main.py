@@ -12,6 +12,7 @@ import filter.unmasked.monochromatic
 import filter.unmasked.colored
 import filter.unmasked.negative
 import filter.unmasked.brightness
+import filter.unmasked.threshold
 
 import filter.masked.sobel
 import filter.masked.median
@@ -415,7 +416,7 @@ Image.fromarray(gaussian_matrix.astype('uint8')).save('results/gaussian_5x5.png'
 '''
 
 
-# 8. Threshold filter
+# 8. Threshold filter, Sharpen filter
 
 '''
 # Threshold in RGB
@@ -527,4 +528,14 @@ Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_levele
 threshold_matrix = numpy.copy(rgb_matrix)
 threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 256)
 Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_256.png')
+'''
+
+'''
+# Sharpen filter (11x11)
+sharpen_matrix = numpy.copy(rgb_matrix)
+sharpen_matrix = filter.core.on_mask_pixel(sharpen_matrix,
+                                           'masks/sharpen_11x11.txt',
+                                           filter.core.default_on_mask_values,
+                                           rgb_channels_size)
+Image.fromarray(sharpen_matrix.astype('uint8')).save('results/sharpen.png')
 '''
