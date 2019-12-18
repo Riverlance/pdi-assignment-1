@@ -385,7 +385,7 @@ Image.fromarray(most_common_b_matrix.astype('uint8')).save('results/most_common_
 '''
 
 
-# 6. M x N mask convolution - Gaussian filter
+# 7. M x N mask convolution - Gaussian filter
 
 '''
 # Gaussian filter (3x3)
@@ -405,4 +405,119 @@ gaussian_matrix = filter.core.on_mask_pixel(gaussian_matrix,
                                             filter.core.default_on_mask_values,
                                             rgb_channels_size)
 Image.fromarray(gaussian_matrix.astype('uint8')).save('results/gaussian_5x5.png')
+'''
+
+
+# 8. Threshold filter
+
+'''
+# Threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_rgb_filter(threshold_matrix, 127)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_rgb.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 4)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_4.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 8)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_8.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 16)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_16.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 32)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_32.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 64)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_64.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 128)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_128.png')
+'''
+
+'''
+# Leveled threshold in RGB
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_rgb_filter(threshold_matrix, 256)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_rgb_256.png')
+'''
+
+'''
+# Threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_y_filter(threshold_matrix, 127)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_yiq.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 4)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_4.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 8)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_8.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 16)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_16.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 32)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_32.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 64)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_64.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 128)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_128.png')
+'''
+
+'''
+# Leveled threshold in Y
+threshold_matrix = numpy.copy(rgb_matrix)
+threshold_matrix = filter.unmasked.threshold.apply_threshold_levels_y_filter(threshold_matrix, 256)
+Image.fromarray(threshold_matrix.astype('uint8')).save('results/threshold_leveled_yiq_256.png')
 '''
