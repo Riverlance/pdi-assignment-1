@@ -13,6 +13,7 @@ import filter.unmasked.colored
 import filter.unmasked.negative
 import filter.unmasked.brightness
 import filter.unmasked.threshold
+import filter.unmasked.sub_sampling
 
 import filter.masked.sobel
 import filter.masked.median
@@ -538,4 +539,25 @@ sharpen_matrix = filter.core.on_mask_pixel(sharpen_matrix,
                                            filter.core.default_on_mask_values,
                                            rgb_channels_size)
 Image.fromarray(sharpen_matrix.astype('uint8')).save('results/sharpen.png')
+'''
+
+'''
+# Sub Sampling (mosaic, 5x5)
+sub_sampling_matrix = numpy.copy(rgb_matrix)
+sub_sampling_matrix = filter.unmasked.sub_sampling.apply_sub_sampling_filter(sub_sampling_matrix, 5)
+Image.fromarray(sub_sampling_matrix.astype('uint8')).save('results/sub_sampling_5x5.png')
+'''
+
+'''
+# Sub Sampling (mosaic, 10x20)
+sub_sampling_matrix = numpy.copy(rgb_matrix)
+sub_sampling_matrix = filter.unmasked.sub_sampling.apply_sub_sampling_filter(sub_sampling_matrix, 10, 20)
+Image.fromarray(sub_sampling_matrix.astype('uint8')).save('results/sub_sampling_10x20.png')
+'''
+
+'''
+# Sub Sampling (mosaic, 20x20)
+sub_sampling_matrix = numpy.copy(rgb_matrix)
+sub_sampling_matrix = filter.unmasked.sub_sampling.apply_sub_sampling_filter(sub_sampling_matrix, 20)
+Image.fromarray(sub_sampling_matrix.astype('uint8')).save('results/sub_sampling_20x20.png')
 '''
