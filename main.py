@@ -14,6 +14,7 @@ import filter.unmasked.negative
 import filter.unmasked.brightness
 import filter.unmasked.threshold
 import filter.unmasked.sub_sampling
+import filter.unmasked.equalization_expansion
 
 import filter.masked.sobel
 import filter.masked.median
@@ -417,7 +418,7 @@ Image.fromarray(gaussian_matrix.astype('uint8')).save('results/gaussian_5x5.png'
 '''
 
 
-# 8. Threshold filter, Sharpen filter
+# 8. Threshold filter, Sharpen filter, Sub Sampling (mosaic)
 
 '''
 # Threshold in RGB
@@ -560,4 +561,63 @@ Image.fromarray(sub_sampling_matrix.astype('uint8')).save('results/sub_sampling_
 sub_sampling_matrix = numpy.copy(rgb_matrix)
 sub_sampling_matrix = filter.unmasked.sub_sampling.apply_sub_sampling_filter(sub_sampling_matrix, 20)
 Image.fromarray(sub_sampling_matrix.astype('uint8')).save('results/sub_sampling_20x20.png')
+'''
+
+# 9. Equalization, Expansion
+
+'''
+# RGB Equalization
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_rgb_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_rgb.png')
+
+# RGB Expansion
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_rgb_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/expansion_rgb.png')
+
+# RGB Equalization -> Expansion
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_rgb_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_rgb_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_expansion_rgb.png')
+'''
+
+'''
+# Y Equalization (keeping chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_y_chroma.png')
+
+# Y Expansion (keeping chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/expansion_y_chroma.png')
+
+# Y Equalization -> Expansion (keeping chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_y_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_expansion_y_chroma.png')
+'''
+
+'''
+# Y Equalization (no chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.gray_scale.apply_gray_scale_y_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_y.png')
+
+# Y Expansion (no chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.gray_scale.apply_gray_scale_y_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/expansion_y.png')
+
+# Y Equalization -> Expansion (no chroma)
+eq_exp_matrix = numpy.copy(rgb_matrix)
+eq_exp_matrix = filter.unmasked.gray_scale.apply_gray_scale_y_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_equalization_y_filter(eq_exp_matrix)
+eq_exp_matrix = filter.unmasked.equalization_expansion.apply_expansion_y_filter(eq_exp_matrix)
+Image.fromarray(eq_exp_matrix.astype('uint8')).save('results/equalization_expansion_y.png')
 '''
